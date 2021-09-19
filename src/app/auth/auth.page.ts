@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { LoadingController } from '@ionic/angular';
 import { AuthService } from './auth.service';
 
 @Component({
@@ -11,12 +12,26 @@ export class AuthPage {
 
   constructor(
     private authSvc: AuthService,
-    private router: Router
+    private router: Router,
+    private loadingCtrl: LoadingController
   ) {}
 
   onLogin() {
     this.authSvc.login();
-    this.router.navigateByUrl('/places/tabs/discover');
+
+    this.loadingCtrl.create({
+      spinner: 'circles',
+      message: 'Please wait...',
+      translucent: true,
+    })
+      .then(loading => {
+        loading.present();
+        setTimeout(() => {
+          loading.dismiss();
+          this.router.navigateByUrl('/places/tabs/discover');
+        }, 2000);
+      })
+
   }
 
 }

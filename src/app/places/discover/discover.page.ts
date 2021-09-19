@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { SegmentChangeEventDetail } from '@ionic/core';
 import Place from '../places.model';
 import { PlacesServices } from '../places.service';
 
@@ -10,7 +11,8 @@ import { PlacesServices } from '../places.service';
 })
 export class DiscoverPage implements OnInit {
 
-  public places: Place[];
+  public loadedPlaces: Place[];
+  public listedLoadedPlaces: Place[];
 
   constructor(
     private placesSvc: PlacesServices,
@@ -18,11 +20,16 @@ export class DiscoverPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.places = this.placesSvc.places;
+    this.loadedPlaces = this.placesSvc.places;
+    this.listedLoadedPlaces = this.loadedPlaces.slice(1);
   }
 
   onShowMore(placeId) {
     this.router.navigate(['/', 'places', 'tabs', 'discover', placeId])
+  }
+
+  onFilterUpdate(event) {
+    console.log(event.detail);
   }
 
 }
