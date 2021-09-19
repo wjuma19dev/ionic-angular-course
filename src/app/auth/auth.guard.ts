@@ -13,6 +13,11 @@ export class AuthGuard implements CanLoad {
   ){}
 
   canLoad(route: Route, segments: UrlSegment[]): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+
+    if (!this.authSvc.userIsAuthenticate) {
+      this.router.navigateByUrl('/auth');
+    }
+
     return true;
   }
 

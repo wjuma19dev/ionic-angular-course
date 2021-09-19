@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { IonItemSliding } from '@ionic/angular';
 import Place from '../places.model';
 import { PlacesServices } from '../places.service';
 
@@ -15,6 +16,11 @@ export class OffersPage implements OnInit {
 
   ngOnInit() {
     this.places = this.placesSvs.places;
+  }
+
+  onEdit(sliding: IonItemSliding) {
+    console.log('Editing place!');
+    sliding.close();
   }
 
 }

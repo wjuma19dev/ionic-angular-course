@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ModalController } from '@ionic/angular';
+import { CreateBookingComponent } from 'src/app/bookings/create-booking/create-booking.component';
 import Place from '../../places.model';
 import { PlacesServices } from '../../places.service';
 
@@ -15,7 +17,8 @@ export class PlaceDetailPage implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private placeSvc: PlacesServices
+    private placeSvc: PlacesServices,
+    private modalCtrl: ModalController
   ) {}
 
   ngOnInit() {
@@ -29,7 +32,17 @@ export class PlaceDetailPage implements OnInit {
   }
 
   onBookPlace() {
-    console.log('Book place');
+    this.modalCtrl.create({
+      component: CreateBookingComponent,
+      componentProps: {selectedPlace: this.place}
+    }).then(modal => {
+      modal.present();
+      return modal.onDidDismiss();
+    }).then(resultData => {
+      if (resultData.role === 'confirm') {
+        console.log(resultData);
+      }
+    });
   }
 
 }
