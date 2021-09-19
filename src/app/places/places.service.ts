@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import Place from "./places.model";
+import _ from 'lodash';
 
 @Injectable({ providedIn: 'root' })
 export class PlacesServices {
@@ -30,5 +31,10 @@ export class PlacesServices {
 
   public get places() {
     return [...this._places];
+  }
+
+  public findOne(placeId) {
+    const place = {..._.find(this.places, p => p.id === placeId)};
+    return place;
   }
 }
