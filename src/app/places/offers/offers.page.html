@@ -12,7 +12,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="ion-padding">
 
   <ion-list fixed>
 
@@ -21,7 +21,13 @@
         <ion-thumbnail slot="start">
           <ion-img [src]="'assets/images/'+place.imageUrl" [alt]="place.title"></ion-img>
         </ion-thumbnail>
-        <ion-label>{{place.title}}</ion-label>
+        <ion-label>
+          <h2>{{place.title}}</h2>
+          <p class="timestamp">
+            <ion-icon name="calendar-outline"></ion-icon><span class="date">Feb 7, 2019</span> to 
+            <ion-icon name="calendar-outline"></ion-icon><span class="date">Feb 7, 2019</span>
+          </p>
+        </ion-label>
       </ion-item>
 
       <ion-item-options side="end">
