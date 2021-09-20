@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-new-offer',
@@ -23,6 +23,9 @@ export class NewOfferPage implements OnInit {
   }
 
   onCreateOffer() {
+    if (!this.form.valid) {
+      return;
+    }
     console.log(this.form);
   }
 
