@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { PlacesServices } from '../../places.service';
+
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-new-offer',
@@ -10,7 +14,12 @@ export class NewOfferPage implements OnInit {
 
   form: FormGroup;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private placeSvc: PlacesServices,
+    private router: Router,
+    private loadingCtrl: LoadingController
+  ) {}
 
   ngOnInit() {
     this.form = this.fb.group({
@@ -26,7 +35,21 @@ export class NewOfferPage implements OnInit {
     if (!this.form.valid) {
       return;
     }
-    console.log(this.form);
+    const {title, price, description, dateFrom, dateTo} = this.form.value;
+
+    // Crear un loading
+    this.loadingCtrl.create({ spinner: 'circles', message: 'Create place, please wait ...' })
+      .then(loading => {
+        loading.present();
+        this.placeSvc.addPlace(title, price, description, dateFrom, dateTo)
+        .subscribe(() => {
+          loading.dismiss();
+          this.form.reset();
+          this.router.navigate(['/', 'places', 'tabs', 'offers']);
+        });
+      });
+
+
   }
 
 }

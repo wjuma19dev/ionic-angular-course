@@ -5,7 +5,7 @@
     </ion-buttons>
     <ion-title>Edit Offer</ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="onCreateOffer()" [disabled]="!form.valid">
+      <ion-button (click)="onEditOffer()" [disabled]="!form.valid">
         <ion-icon slot="icon-only" name="checkmark"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -20,10 +20,10 @@
         <ion-col size-sm="6" offset-sm="3">
           <ion-item>
             <ion-label position="floating">Title</ion-label>
-            <ion-input 
-              type="text" 
-              autocomplete 
-              autocorrect 
+            <ion-input
+              type="text"
+              autocomplete
+              autocorrect
               formControlName="title">
             </ion-input>
           </ion-item>

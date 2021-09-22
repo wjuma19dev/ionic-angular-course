@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import Place from './places.model';
+// import Place from './places.model';
 
 @Component({
   selector: 'app-places',
@@ -8,7 +8,7 @@ import Place from './places.model';
 })
 export class PlacesPage {
 
-  
+
 
   // get places() {
   //   return [...this._places];

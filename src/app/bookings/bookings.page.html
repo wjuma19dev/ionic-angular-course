@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-menu-button menu="main"></ion-menu-button>
     </ion-buttons>
@@ -11,9 +11,9 @@
 
   <ion-grid fixed>
     <ion-row>
-      <ion-col size-md="6" offset-md="3">
+      <ion-col size-md="6" offset-md="3" *ngIf="loadedBookings && loadedBookings.length > 0; else noBookings">
         <ion-list>
-      
+
           <ion-item-sliding #sliding *ngFor="let booking of loadedBookings">
             <ion-item>
               <ion-label>
@@ -28,9 +28,14 @@
               </ion-item-option>
             </ion-item-options>
           </ion-item-sliding>
-      
+
         </ion-list>
       </ion-col>
+      <ng-template #noBookings>
+        <ion-col class="ion-text-center" size-md="6" offset-md="3">
+          <p>There are no booking placed, please choose one!</p>
+        </ion-col>
+      </ng-template>
     </ion-row>
   </ion-grid>
 
